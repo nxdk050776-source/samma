@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="سماء">
+    <meta name="theme-color" content="#0a0a1a">
+    <title>🌌 سماء</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header id="mainHeader">
+    <div class="header-left">
+        <h1 id="headerTitle">🌌 سماء</h1>
+    </div>
+    <div class="header-right">
+        <span id="statusBadge">🌐</span>
+        <span id="timeBadge">🕐 --:--</span>
+    </div>
+</header>
+
+<section id="view-map" class="view active">
+    <nav id="mapFilters">
+        <button class="filter active" data-type="all">🌐 الكل</button>
+        <button class="filter" data-type="plane">✈️ طائرات</button>
+        <button class="filter" data-type="iss">🛰️ ISS</button>
+        <button class="filter" data-type="lightning">⚡ برق</button>
+    </nav>
+    <div id="map"></div>
+
+    <div id="mapStyleBtns">
+        <button class="map-style active" data-style="dark">🌙 داكن</button>
+        <button class="map-style" data-style="terrainFull">🗺️ تضاريس+أسماء</button>
+        <button class="map-style" data-style="terrain">🏔️ تضاريس</button>
+        <button class="map-style" data-style="satellite">🛰️ قمر</button>
+    </div>
+
+    <div id="mapStats">
+        <div class="stat-row">
+            <span>✈️ <b id="planeCount">0</b></span>
+            <span>🛰️ <b id="issCount">0</b></span>
+            <span>⚡ <b id="lightningCount">0</b></span>
+        </div>
+        <div id="nextEvent">🔔 جاهز</div>
+    </div>
+    <button id="locateBtn">📍</button>
+</section>
+
+<section id="view-night" class="view">
+    <div id="nightViewfinder">
+        <video id="nightVideo" autoplay playsinline muted></video>
+        <canvas id="nightCanvas"></canvas>
+        <div class="crt-overlay"></div>
+        <div id="nightCrosshair">⌖</div>
+        <div id="luxMeter"><div id="luxBar"></div></div>
+        <div id="nightModes">
+            <button class="nmode active" data-mode="green">🟢</button>
+            <button class="nmode" data-mode="white">⚪</button>
+            <button class="nmode" data-mode="red">🔴</button>
+            <button class="nmode" data-mode="amber">🟡</button>
+        </div>
+        <div id="nightControls">
+            <button id="nightSnapshot" class="big-btn">📸</button>
+            <button id="nightSwitch" class="big-btn">🔄</button>
+            <button id="nightZoomIn" class="small-btn">➕</button>
+            <button id="nightZoomOut" class="small-btn">➖</button>
+        </div>
+    </div>
+</section>
+
+<section id="view-blackbox" class="view">
+    <div class="bb-header">
+        <div id="bbStatus">⚫ متوقف</div>
+        <div id="bbTimer">00:00:00</div>
+    </div>
+    <div class="bb-stats">
+        <div class="bb-stat">
+            <span class="bb-icon">🎙️</span>
+            <b id="bbAudioCount">0</b>
+            <small>مقاطع</small>
+        </div>
+        <div class="bb-stat">
+            <span class="bb-icon">📍</span>
+            <b id="bbLocCount">0</b>
+            <small>مواقع</small>
+        </div>
+    </div>
+    <div class="bb-controls">
+        <button id="bbStart" class="btn primary">▶️ ابدأ</button>
+        <button id="bbStop" class="btn danger" disabled>⏹️ إيقاف</button>
+    </div>
+</section>
+
+<section id="view-space" class="view">
+    <div class="space-card">
+        <h2>🛰️ محطة الفضاء الدولية</h2>
+        <div id="issInfo">جاري التحميل...</div>
+    </div>
+</section>
+
+<nav id="bottomTabs">
+    <button class="bottom-tab active" data-view="map">
+        <span class="tab-icon">🗺️</span>
+        <span class="tab-label">الخريطة</span>
+    </button>
+    <button class="bottom-tab" data-view="night">
+        <span class="tab-icon">🌙</span>
+        <span class="tab-label">المنظار</span>
+    </button>
+    <button class="bottom-tab" data-view="blackbox">
+        <span class="tab-icon">💀</span>
+        <span class="tab-label">الأمان</span>
+    </button>
+    <button class="bottom-tab" data-view="space">
+        <span class="tab-icon">🛰️</span>
+        <span class="tab-label">الفضاء</span>
+    </button>
+</nav>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
